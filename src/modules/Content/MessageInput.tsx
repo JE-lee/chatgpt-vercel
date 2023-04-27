@@ -66,7 +66,7 @@ const MessageInput: FC<{
   }, [currentId]);
 
   return (
-    <div className="flex items-center p-5 pt-5">
+    <div className="w-full max-w-content m-auto flex items-center p-5 pt-5 ">
       <PromptSelect
         keyword={promptKeyword}
         showPrompt={showPrompt}

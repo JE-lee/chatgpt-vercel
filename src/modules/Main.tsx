@@ -149,9 +149,7 @@ const Main: FC<{ lang: Lang }> = ({ lang }) => {
       }}
     >
       <div
-        className={`w-[100%] h-[100%] flex overflow-hidden ${
-          isMobile ? '' : 'rounded-2xl'
-        }`}
+        className={`w-[100%] h-[100%] flex overflow-hidden`}
         style={{ boxShadow: '0 20px 68px rgba(0, 0, 0, 0.15)' }}
       >
         {isMobile ? (
@@ -170,18 +168,20 @@ const Main: FC<{ lang: Lang }> = ({ lang }) => {
           </>
         ) : (
           <>
-            <div className="w-1/3 ">{getSidebar()}</div>
-            <div className="w-2/3 flex">
-              <div
-                className={`h-full ${
-                  activeSetting ? 'w-3/5' : 'w-full'
-                }  flex-1`}
-              >
-                {currentId ? getContent() : getEmpty()}
+            <div className="w-80">{getSidebar()}</div>
+            <div className="flex-1">
+              <div className="flex w-full h-full">
+                <div
+                  className={`h-full ${
+                    activeSetting ? 'w-3/5' : 'w-full'
+                  }  flex-1`}
+                >
+                  {currentId ? getContent() : getEmpty()}
+                </div>
+                {activeSetting ? (
+                  <div className="w-2/5">{getConfigration()}</div>
+                ) : null}
               </div>
-              {activeSetting ? (
-                <div className="w-2/5">{getConfigration()}</div>
-              ) : null}
             </div>
           </>
         )}

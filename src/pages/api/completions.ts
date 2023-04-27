@@ -52,7 +52,8 @@ export const post: APIRoute = async ({ request }) => {
   }
 
   try {
-    const res = await fetch(`https://${baseURL}/v1/chat/completions`, {
+    const protocal = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    const res = await fetch(`${protocal}://${baseURL}/v1/chat/completions`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${key}`,
@@ -77,6 +78,7 @@ export const post: APIRoute = async ({ request }) => {
     const decoder = new TextDecoder();
     const encoder = new TextEncoder();
 
+    console.log('ReadableStream', ReadableStream);
     const stream = new ReadableStream({
       async start(controller) {
         const streamParser = (event: ParsedEvent | ReconnectInterval) => {

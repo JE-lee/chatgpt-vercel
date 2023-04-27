@@ -263,36 +263,43 @@ const Content: FC<ContentProps> = ({ setActiveSetting }) => {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <ContentHeader
-        conversation={conversation}
-        setActiveSetting={setActiveSetting}
-        setShowPrompt={setShowPrompt}
-        setText={setText}
-      />
-      <div className="flex-1 overflow-auto common-scrollbar p-5 pb-0">
-        <MessageBox
-          streamMessage={streamMessage}
-          messages={messages}
-          mode={mode}
-          loading={loading}
+      <div className="w-full max-w-content m-auto">
+        <ContentHeader
+          conversation={conversation}
+          setActiveSetting={setActiveSetting}
+          setShowPrompt={setShowPrompt}
+          setText={setText}
         />
       </div>
-      <MessageInput
-        text={text}
-        setText={setText}
-        streamMessage={streamMessage}
-        showPrompt={showPrompt && mode !== 'image'}
-        setShowPrompt={setShowPrompt}
-        onSubmit={async (message: string) => {
-          if (mode === 'image') {
-            sendImageChatMessages(message);
-          } else {
-            sendTextChatMessages(message);
-          }
-        }}
-        onCancel={stopGenerate}
-        loading={loading}
-      />
+      <div className="border-b border-[#edeeee]"></div>
+      <div className="flex-1 flex flex-col  overflow-auto">
+        <div className="flex-1 overflow-auto common-scrollbar pb-5">
+          <MessageBox
+            streamMessage={streamMessage}
+            messages={messages}
+            mode={mode}
+            loading={loading}
+          />
+        </div>
+        <div className="w-full border-t border-[#edeeee]">
+          <MessageInput
+            text={text}
+            setText={setText}
+            streamMessage={streamMessage}
+            showPrompt={showPrompt && mode !== 'image'}
+            setShowPrompt={setShowPrompt}
+            onSubmit={async (message: string) => {
+              if (mode === 'image') {
+                sendImageChatMessages(message);
+              } else {
+                sendTextChatMessages(message);
+              }
+            }}
+            onCancel={stopGenerate}
+            loading={loading}
+          />
+        </div>
+      </div>
     </div>
   );
 };
